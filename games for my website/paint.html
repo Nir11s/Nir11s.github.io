@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>paint</title>
+	<style>
+		body{
+			background-color:white;
+		}
+		canvas{
+			border: black solid 4px;
+			margin-right: 30px;
+		}
+		#container {
+			display: flex;
+		}
+		 a {
+			text-align: center;
+			text-decoration: none;
+			color: black;
+			font-family: comic sans ms;
+			font-size:30px;
+		 }
+		 a:hover {
+			color: blue;
+			font-size:35px
+		 }
+	</style>
+  </head>
+  <body>
+	<div id="container">
+		<canvas style="test-align:center; display:inline" id="myCanvas" width="600" height="400"></canvas>
+		<form>
+			<p><a href="file:///U:/School/%D7%9C%D7%99%D7%9E%D7%95%D7%93%D7%99%D7%9D/My%20cyber/Nir's%20website/Nir's%20site.html"> << go back</a></p>
+			<p style="color:black; font-size: 25px; font-family: comic sans ms; font-weight:bold;"> Use: </p>
+			<p style="color:black; font-size: 20px; font-family: comic sans ms; font-weight:bold;"> ⬆️ ⬇️ ⬅️ ➡️ </p>
+			<p style="color:blue; font-size: 30px; font-family: comic sans ms; font-weight:bold;"> Game settings:</p>
+			circle:
+			<input type="radio" id="pacmancircle" name="pacmanshape" checked/>
+			Square:
+			<input type="radio" id="pacmansquare" name="pacmanshape"/>
+			<br/>
+			color:
+			<input type="color" id="pacmanColor" value="black"/>
+			<br/>
+			fill:
+			<input type="checkbox" id="pacmanfill" checked/>
+			<br/>
+			size:
+			<input type="text" id="pacmansize" value="25"/>
+			<br/>
+			border color:
+			<input type="color" id="pacmanborderColor" value="black"/>
+			<br/>
+			border:
+			<input type="checkbox" id="pacmanborder"/>
+			<br/>
+			border size:
+			2px:
+			<input type="radio" id="2px" name= "bordersize" checked/>
+			5px:
+			<input type="radio" id="5px" name="bordersize"/>
+			10px:
+			<input type="radio" id="10px" name="bordersize" />
+			20px:
+			<input type="radio" id="20px" name="bordersize"/>
+			<br/>
+			<input type="button" value="send" onclick="formSent();"/>
+			
+			
+		</form>
+	</div>
+    <script>
+		var canvas = document.getElementById('myCanvas');
+		var context = canvas.getContext('2d');
+		var x = 50;
+		var y = 50;
+		var r = 25;
+		var deg = Math.PI/180;
+		
+		var WIDTH = canvas.width;
+		var HEIGHT = canvas.height;
+		var offset = 5;
+		var color ="black";
+		var border = true;
+		var borderColor = "black";
+		var bordersize = 2;
+		var shape = "circle"
+		var fill = true;
+		drawPacman(x,y);
+		
+		document.onkeydown = pacmanMoving;
+		
+		function pacmanMoving(){
+			var e = event.keyCode;
+			
+			
+			
+			if(e == 37/*left*/){
+				x = x - offset;
+			}
+			
+			else if(e == 38/*up*/){
+				y = y - offset;
+			}
+				
+			else if(e == 39/*right*/){
+				x = x + offset;
+			}
+			
+			else if(e == 40/*down*/){
+				y = y + offset;
+			}	
+			//context.clearRect(0, 0, WIDTH, HEIGHT)
+		   drawPacman(x, y, r);
+		}
+	
+		drawPacman(x, y, r);
+		
+		
+		function drawPacman(xP, yP, rP){
+			context.fillStyle = color;
+			context.strokeStyle = borderColor; 
+			context.lineWidth = bordersize;
+			if(shape == "circle") {
+				context.beginPath();
+				context.arc(xP, yP, rP, 0*deg, 360*deg);
+			}
+			else { 
+				context.beginPath();
+				context.rect(xP, yP, rP, rP);
+			}
+			if (fill) {
+				context.fill()
+			}
+			if(border) {
+				context.stroke();
+			}
+			
+		} 
+		
+		function formSent()
+		{
+			color = document.getElementById("pacmanColor").value;
+			var newr = document.getElementById("pacmansize").value;
+			if(newr > 0
+			)
+			{
+				r = newr;
+			}
+			border = document.getElementById("pacmanborder").checked;
+			borderColor = document.getElementById("pacmanborderColor").value;
+			fill =  document.getElementById("pacmanfill").checked;
+			if(document.getElementById('pacmansquare').checked) {
+				shape = "square";
+			}
+			else {
+				shape = "circle";
+			}
+			
+			if(document.getElementById("2px").checked) {
+				bordersize = 2;
+			}
+			else if(document.getElementById("5px").checked){
+				bordersize = 5;
+			}
+			else if(document.getElementById("10px").checked){
+				bordersize = 10;
+			}
+			else if(document.getElementById("20px").checked){
+				bordersize = 20;
+			}
+			
+			drawPacman(x,y,r);
+		}
+			
+    </script>
+  </body>
+</html>

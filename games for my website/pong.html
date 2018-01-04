@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>pong</title>
+		
+	</head>
+	<body>
+		<canvas id="pong" width="700" height="500" style="border:3px solid #000000; background-image: url(./photos/m.png);">
+		</canvas>
+		<script>
+		
+		var canvas = document.getElementById("pong");
+		var ctx = canvas.getContext("2d");
+		
+		var w = canvas.width;
+		var h = canvas.height;
+		var xr = 6;
+		var yr = 60;
+		var x1 = 75;
+		var y1 = h/2-30;
+		var x2 = w-75;
+		var y2 = h/2-30;
+		var d = Math.PI/180
+		var movement = {up:false,down:false,wk:false,sk:false};
+		var speed = 5;
+		var fps = 60;
+		document.onkeydown = start;
+		document.onkeyup = stop;
+		
+		
+		function pe1(){
+			ctx.beginPath();
+			ctx.ellipse(x1,y1,xr,yr,0,0,360*d);
+			ctx.fill();
+		}
+		
+		function pe2(){
+			ctx.beginPath();
+			ctx.ellipse(x2,y2,xr,yr,0,0,360*d);
+			ctx.fill();
+		}
+		
+		function render(){
+			ctx.clearRect(0,0,w,h);
+			pe1();
+			pe2();
+		}
+			
+		function start(event){
+			var a = event.keyCode;
+			
+			if(a == 38){
+				movement.up = true;
+			}
+			
+			else if(a == 40){
+				movement.down = true;
+			} 
+			
+			else if(a == 87){
+				movement.wk = true;
+			}
+			
+			else if(a == 83){
+				movement.sk = true;
+			}
+			
+			pe1();
+			pe2();
+		}
+		
+		function move(){
+			if(movement.up){
+				if(y2>5){
+					y2-=speed;
+				}
+			}
+			
+			else if(movement.down){
+				if(y2<w-5){
+					y2+=speed;
+				}
+			}
+			
+			if (movement.wk){
+				if(y1>5){
+					y1-=speed;
+				}
+			}
+			
+			else if(movement.sk){
+				if(y1<w-5){
+					y1+=speed;
+				}
+			}
+			
+			pe1();
+			pe2();
+		}
+		
+		function stop(event){
+			var a = event.keyCode;
+			
+			if(a == 38){
+				movement.up = false;
+			}
+			
+			else if(a == 40){
+				movement.down = false;
+			}
+			
+			else if(a == 87){
+				movement.wk = false;
+			}
+			
+			else if(a == 83){
+				movement.sk = false;
+			}
+		}
+		
+		function update(){
+			move();
+			render();
+		}
+		
+		
+		setInterval(update,1000/fps);
+		
+		
+		</script>
+	
+	</body>
+</html>

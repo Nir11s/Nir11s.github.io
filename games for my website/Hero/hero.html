@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hero</title>
+
+</head>
+<body>
+	<canvas id="hero" width="700" height="500" style="border:3px solid #000000; display: block; margin: auto; padding: 0; background-image:url(./photos/la);">
+	</canvas>
+	<script>
+	var canvas = document.getElementById("hero");
+	var ctx = canvas.getContext("2d");
+	
+	var w = canvas.width;
+	var h = canvas.height;
+	var fps = 60;
+	var speed = 3;
+	var movement = {right:false,left:false,up:false,down:false};
+	var x = 0;
+	var y = 435;
+	var xe = 50;
+	var ye = 50;
+	document.onkeydown = start;
+	document.onkeyup = stop;
+	
+	function rect(){
+		ctx.beginPath();
+		ctx.fillStyle = "#0066ff";
+		ctx.rect(x,y,xe,ye);
+		ctx.lineWidth = 5;
+		ctx.stroke();
+		ctx.fill();
+	}
+	
+	function updater(){
+		ctx.clearRect(0,0,w,h);
+		rect();
+	}
+	
+	function start(event){
+		
+		var a = event.keyCode;
+		
+		if(a == 37/*left*/){
+			movement.left = true;
+		}
+		
+		else if(a == 38/*up*/){
+			movement.up = true;
+		}
+		
+		else if(a == 39/*right*/){
+			movement.right = true;
+		}
+		
+		else if(a == 40/*down*/){
+			movement.down = true;
+		}
+		
+		rect();
+	}
+	
+	function move(){
+		if(movement.left){
+			if(x>0){
+				x-=speed;
+			}
+		}
+		
+		if(movement.up){
+			if(y>h-130){
+				y-=speed;
+			}
+		}
+		
+		if(movement.right){
+			if(x+xe<w){
+				x+=speed;
+			}
+		}
+		
+		if(movement.down){
+			if(y+ye<485){
+				y+=speed;
+			}
+		}
+		
+		rect();
+	}
+	
+	function stop(event){
+		
+		var a = event.keyCode;
+		
+		if(a == 37){
+			movement.left = false;
+		}
+		
+		else if(a == 38){
+			movement.up = false;
+		}
+		
+		else if(a == 39){
+			movement.right = false;
+		}
+		
+		else if(a == 40){
+			movement.down = false;
+		}
+	}
+	
+	function update(){
+		move();
+		updater();
+	}
+	
+	setInterval(update,1000/fps);
+	</script>
+	
+</body>
+</html>

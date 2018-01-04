@@ -1,0 +1,63 @@
+<html>
+<head>
+	<style>
+		* {
+		 font-size:40px
+		 }
+		 a {
+			text-align: center;
+			text-decoration: none;
+			color: black;
+			font-family: comic sans ms;
+		 }
+		 a:hover {
+			color: #4dff4d; ;
+			font-size:50px;
+			}
+			 p {
+			text-align: center;
+			margin: 0px;
+		 }
+		</style>
+</head>
+<body background="http://xn--6dbfgjl0f.co.il/wp-content/uploads/2016/03/back1.jpg">
+<p><a href="file:///U:/My%20cyber/Nir's%20website/games%20for%20my%20website/Questions/Questions.html"><< go back</a></p>
+<script>
+	function q() {
+		var name = prompt("Whats Your Name?");
+		alert("Hello " + name + " my name is Bob");
+		var a =  prompt("amm... "+ name +" you are Male or a Female?" );
+		if (a == "male") {
+			alert("nice.. you are male!");
+			
+		}
+		else if(a == "female") {
+			alert("nice.. You are a female!");
+		}
+
+		
+		var b = prompt("how old are you? (says in numbers pls)")
+		alert("nice!");
+		
+		var c = prompt("do you love pizza?");
+		if (c == "yes"){
+		alert("good!");
+		}
+		
+		else if(c == "no"){                    
+		alert("your problem! pizza is good");
+		}
+		
+		if (c== "no" || c == "nope"){
+			alert(name + " that what I know about you: you have a problems cuz you not love pizza! your name is " + name +", your are " + a + " and you are " + b + " years old");
+		}
+		else if (c== "yes" || c == "yea") {
+			alert(name + " that what I know about you: your name is " + name +", you are " + a + " and you are " + b + " years old and you love pizza! :D")
+		}
+		else {
+			alert(name + " that what I know about you: your name is " + name +", your are " + a + " and when you were asked if you love pizza, you said "+c)
+		}
+	}
+	q();
+</script>
+</html>		
